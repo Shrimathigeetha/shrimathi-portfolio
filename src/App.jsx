@@ -13,19 +13,40 @@ import Footer from './components/Footer'
 
 function App() {
   return (
-    <div className="min-h-screen bg-white dark:bg-gradient-to-br dark:from-slate-950 dark:via-slate-900 dark:to-slate-800">
+    <div className="w-full min-h-screen bg-white dark:bg-gradient-to-br dark:from-slate-950 dark:via-slate-900 dark:to-slate-800">
       <Navbar />
-      <main className="pt-20">
+      <main className="w-full">
         <Hero />
         <Stats />
-        <About />
-        <SkillsEnhanced />
-        <Experience />
-        <Projects />
-        <Certifications />
-        <Education />
-        <Achievements />
-        <Contact />
+        
+        <div className="bg-white dark:bg-slate-900/50">
+          <About />
+        </div>
+        
+        <div className="bg-gray-50/50 dark:bg-slate-800/30">
+          <SkillsEnhanced />
+        </div>
+        
+        <div className="bg-white dark:bg-slate-900/50">
+          <Experience />
+        </div>
+        
+        <div className="bg-gray-50/50 dark:bg-slate-800/30">
+          <Projects />
+        </div>
+        
+        <div className="bg-white dark:bg-slate-900/50">
+          <div className="max-w-6xl mx-auto px-4 py-16 space-y-16">
+            <Certifications />
+            <Education />
+            <Achievements />
+          </div>
+        </div>
+        
+        <div className="bg-gradient-to-b from-white to-gray-50 dark:from-slate-900 dark:to-slate-950">
+          <Contact />
+        </div>
+        
         <Footer />
       </main>
     </div>
