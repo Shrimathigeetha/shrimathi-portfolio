@@ -1,4 +1,6 @@
 import { useState, useEffect } from 'react'
+import { FiMenu, FiX, FiMoon, FiSun } from 'react-icons/fi'
+import { motion } from 'framer-motion'
 
 export default function Navbar() {
   const [open, setOpen] = useState(false)
@@ -18,73 +20,55 @@ export default function Navbar() {
     localStorage.setItem('theme', next ? 'dark' : 'light')
   }
 
-  const links = [
-    { to: '#home', label: 'Home' },
-    { to: '#about', label: 'About' },
-    { to: '#skills', label: 'Skills' },
-    { to: '#experience', label: 'Experience' },
-    { to: '#projects', label: 'Projects' },
-    { to: '#contact', label: 'Contact' },
-  ]
-
   return (
-    <header className="w-full bg-transparent">
-      <div className="max-w-5xl mx-auto px-4 py-4 flex items-center justify-between">
-        <a href="#home" className="text-xl font-semibold text-white">Shrimathi T</a>
+    <motion.header className="fixed w-full top-0 z-50 bg-white/10 dark:bg-black/10 backdrop-blur-md border-b border-white/20" initial={{ y: -100 }} animate={{ y: 0 }} transition={{ duration: 0.5 }}>
+      <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+        <motion.a href="#home" className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-cyan-400 bg-clip-text text-transparent" whileHover={{ scale: 1.05 }}>
+          Shrimathi
+        </motion.a>
 
-        <nav className="hidden md:flex items-center space-x-6">
-          {links.map((l) => (
-            <a key={l.to} href={l.to} className="text-gray-300 hover:text-white">
+        <nav className="hidden md:flex items-center space-x-8">
+          {[
+            { to: '#home', label: 'Home' },
+            { to: '#about', label: 'About' },
+            { to: '#skills', label: 'Skills' },
+            { to: '#experience', label: 'Experience' },
+            { to: '#projects', label: 'Projects' },
+            { to: '#contact', label: 'Contact' },
+          ].map((l) => (
+            <motion.a key={l.to} href={l.to} className="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-cyan-400 transition" whileHover={{ scale: 1.1 }}>
               {l.label}
-            </a>
+            </motion.a>
           ))}
-          <a href="/Shrimathi_T_Resume_2026.pdf" target="_blank" rel="noreferrer" className="ml-2 px-3 py-1 bg-cyan-500 text-white rounded-md text-sm">
+
+          <motion.button onClick={toggleTheme} className="ml-4 p-2 rounded-lg bg-blue-100 dark:bg-slate-800" whileHover={{ scale: 1.1 }}>
+            {dark ? <FiSun className="text-yellow-400" /> : <FiMoon className="text-blue-600" />}
+          </motion.button>
+
+          <motion.a href="/Shrimathi_T_Resume_2026.pdf" target="_blank" rel="noreferrer" className="px-4 py-2 bg-gradient-to-r from-blue-600 to-cyan-500 text-white rounded-lg font-medium" whileHover={{ scale: 1.05 }}>
             Resume
-          </a>
-          <button onClick={toggleTheme} className="ml-3 p-2 rounded-md bg-transparent text-gray-200">
-            {dark ? (
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                <path d="M17.293 13.293A8 8 0 116.707 2.707a8 8 0 0010.586 10.586z" />
-              </svg>
-            ) : (
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4.22 2.03a1 1 0 011.415 0l.708.707a1 1 0 11-1.414 1.415l-.709-.708a1 1 0 010-1.414zM18 9a1 1 0 110 2h-1a1 1 0 110-2h1zM6.34 4.343a1 1 0 010 1.414L5.63 6.464A1 1 0 114.216 5.05l.709-.707a1 1 0 011.414 0zM4 9a1 1 0 110 2H3a1 1 0 110-2h1zM10 16a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zm6.364-1.636a1 1 0 010 1.414l-.708.708a1 1 0 11-1.415-1.414l.708-.708a1 1 0 011.415 0zM6.343 15.657a1 1 0 01-1.414 0l-.708-.707a1 1 0 011.414-1.415l.708.708a1 1 0 010 1.414z" />
-              </svg>
-            )}
-          </button>
+          </motion.a>
         </nav>
 
-        <button
-          className="md:hidden p-2 text-gray-300"
-          onClick={() => setOpen((v) => !v)}
-          aria-label="Toggle menu"
-        >
-          {open ? (
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-            </svg>
-          ) : (
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-            </svg>
-          )}
+        <button className="md:hidden p-2" onClick={() => setOpen(!open)}>
+          {open ? <FiX size={24} /> : <FiMenu size={24} />}
         </button>
       </div>
 
       {open && (
-        <div className="md:hidden bg-slate-800">
-          <div className="px-4 py-4 flex flex-col space-y-2">
-            {links.map((l) => (
-              <a key={l.to} href={l.to} className="text-gray-200" onClick={() => setOpen(false)}>
-                {l.label}
+        <motion.div className="md:hidden bg-white/95 dark:bg-slate-900/95 backdrop-blur-lg" initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }}>
+          <div className="px-4 py-4 flex flex-col space-y-3">
+            {['Home', 'About', 'Skills', 'Experience', 'Projects', 'Contact'].map((label) => (
+              <a key={label} href={`#${label.toLowerCase()}`} className="text-gray-700 dark:text-gray-300" onClick={() => setOpen(false)}>
+                {label}
               </a>
             ))}
-            <a href="/Shrimathi_T_Resume_2026.pdf" target="_blank" rel="noreferrer" className="mt-2 px-3 py-1 bg-cyan-500 text-white rounded-md text-sm">
+            <motion.a href="/Shrimathi_T_Resume_2026.pdf" target="_blank" rel="noreferrer" className="px-4 py-2 bg-gradient-to-r from-blue-600 to-cyan-500 text-white rounded-lg text-center" whileHover={{ scale: 1.05 }}>
               Resume
-            </a>
+            </motion.a>
           </div>
-        </div>
+        </motion.div>
       )}
-    </header>
+    </motion.header>
   )
 }
