@@ -1,6 +1,5 @@
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
-import Stats from './components/Stats'
 import About from './components/About'
 import SkillsEnhanced from './components/SkillsEnhanced'
 import Experience from './components/Experience'
@@ -13,29 +12,25 @@ import Footer from './components/Footer'
 
 function App() {
   return (
-    <div className="w-full min-h-screen bg-white dark:bg-gradient-to-br dark:from-slate-950 dark:via-slate-900 dark:to-slate-800">
+    <div className="w-full min-h-screen bg-slate-950 dark">
       <Navbar />
       <main className="w-full">
         <Hero />
-        <Stats />
+        <About />
         
-        <div className="bg-white dark:bg-slate-900/50">
-          <About />
-        </div>
-        
-        <div className="bg-gray-50/50 dark:bg-slate-800/30">
+        <div className="bg-slate-900">
           <SkillsEnhanced />
         </div>
         
-        <div className="bg-white dark:bg-slate-900/50">
+        <div className="bg-slate-950">
           <Experience />
         </div>
         
-        <div className="bg-gray-50/50 dark:bg-slate-800/30">
+        <div className="bg-slate-900">
           <Projects />
         </div>
         
-        <div className="bg-white dark:bg-slate-900/50">
+        <div className="bg-slate-950">
           <div className="max-w-6xl mx-auto px-4 py-16 space-y-16">
             <Certifications />
             <Education />
@@ -43,7 +38,7 @@ function App() {
           </div>
         </div>
         
-        <div className="bg-gradient-to-b from-white to-gray-50 dark:from-slate-900 dark:to-slate-950">
+        <div className="bg-slate-900">
           <Contact />
         </div>
         

@@ -1,14 +1,14 @@
 import { motion } from 'framer-motion'
 import { Typewriter } from 'react-simple-typewriter'
-import { FiArrowRight, FiGithub, FiLinkedin, FiMail } from 'react-icons/fi'
-import heroImg from '../assets/hero.png'
+import { FiGithub, FiLinkedin, FiMail, FiInstagram } from 'react-icons/fi'
+import { FiYoutube } from 'react-icons/fi'
 
 export default function Hero() {
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: { staggerChildren: 0.15, delayChildren: 0.2 },
+      transition: { staggerChildren: 0.2, delayChildren: 0.3 },
     },
   }
 
@@ -17,86 +17,71 @@ export default function Hero() {
     visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: 'easeOut' } },
   }
 
+  const techStack = ['React', 'Angular', 'MongoDB', 'SQL', 'Node.js', 'ASP.NET', 'Azure', 'AWS']
+
   return (
-    <section id="home" className="min-h-screen w-full pt-32 pb-20 relative overflow-hidden flex items-center justify-center">
-      {/* Animated Background Blobs */}
-      <div className="absolute inset-0 -z-10 overflow-hidden">
-        <div className="absolute top-0 -left-40 w-80 h-80 bg-blue-400/20 rounded-full mix-blend-multiply filter blur-3xl animate-blob"></div>
-        <div className="absolute top-40 -right-40 w-80 h-80 bg-cyan-400/20 rounded-full mix-blend-multiply filter blur-3xl animate-blob animation-delay-2000"></div>
-        <div className="absolute -bottom-20 left-1/3 w-80 h-80 bg-purple-400/20 rounded-full mix-blend-multiply filter blur-3xl animate-blob animation-delay-4000"></div>
+    <section id="home" className="min-h-screen w-full bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 text-white flex items-center justify-center relative overflow-hidden pt-20">
+      {/* Animated Background Elements */}
+      <div className="absolute inset-0 overflow-hidden">
+        {/* Floating dots */}
+        {[...Array(50)].map((_, i) => (
+          <motion.div key={i} className="absolute w-1 h-1 bg-cyan-400/20 rounded-full" initial={{ x: Math.random() * 1000 - 500, y: Math.random() * 1000 - 500 }} animate={{ y: [0, -30, 0], x: [0, Math.random() * 20 - 10, 0] }} transition={{ duration: Math.random() * 5 + 5, repeat: Infinity }} style={{ left: `${Math.random() * 100}%`, top: `${Math.random() * 100}%` }} />
+        ))}
       </div>
 
-      <motion.div className="w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8" variants={containerVariants} initial="hidden" animate="visible">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-          {/* Text Content */}
-          <motion.div className="flex flex-col justify-center" variants={itemVariants}>
-            <motion.div className="mb-6" variants={itemVariants}>
-              <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold leading-tight mb-4">
-                <span className="block">Hi, I'm</span>
-                <span className="block bg-gradient-to-r from-blue-600 via-purple-600 to-cyan-500 bg-clip-text text-transparent">Shrimathi T</span>
-              </h1>
-            </motion.div>
+      <motion.div className="w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center" variants={containerVariants} initial="hidden" animate="visible">
+        {/* Main Heading */}
+        <motion.div className="mb-8" variants={itemVariants}>
+          <h1 className="text-6xl sm:text-7xl lg:text-8xl font-bold leading-tight mb-6">
+            <span className="block bg-gradient-to-r from-blue-400 via-cyan-400 to-purple-500 bg-clip-text text-transparent">SHRIMATHI T</span>
+          </h1>
+        </motion.div>
 
-            <motion.div className="text-xl sm:text-2xl lg:text-3xl font-semibold mb-6 h-20 flex items-start" variants={itemVariants}>
-              <span className="text-gray-700 dark:text-gray-300">I build</span>
-              <span className="ml-3 text-transparent bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text">
-                <Typewriter
-                  words={['Beautiful Web Apps', 'Scalable Solutions', 'Modern Interfaces', 'Cloud Applications']}
-                  loop={0}
-                  cursor
-                  cursorStyle="▮"
-                  typeSpeed={60}
-                  deleteSpeed={40}
-                  delaySpeed={2500}
-                />
-              </span>
-            </motion.div>
+        {/* Subtitle */}
+        <motion.h2 className="text-3xl sm:text-4xl lg:text-5xl font-light text-white mb-8" variants={itemVariants}>
+          Full Stack Web Developer
+        </motion.h2>
 
-            <motion.p className="text-lg text-gray-600 dark:text-gray-400 mb-8 leading-relaxed max-w-lg" variants={itemVariants}>
-              Full-stack developer with 4+ years of experience building enterprise applications. Specialized in React, Angular, .NET Core, and Azure cloud solutions. Passionate about clean code and scalable architecture.
-            </motion.p>
+        {/* Tech Stack */}
+        <motion.div className="mb-12 flex flex-wrap justify-center gap-3 sm:gap-4 text-sm sm:text-base" variants={itemVariants}>
+          {techStack.map((tech, idx) => (
+            <span key={idx} className="px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full text-gray-300 border border-white/20 hover:border-cyan-400/50 transition">
+              {tech}
+            </span>
+          ))}
+        </motion.div>
 
-            {/* CTA Buttons */}
-            <motion.div className="flex flex-col sm:flex-row gap-4 mb-10" variants={itemVariants}>
-              <motion.a href="/Shrimathi_T_Resume_2026.pdf" target="_blank" rel="noreferrer" className="px-8 py-4 bg-gradient-to-r from-blue-600 to-cyan-500 text-white rounded-xl font-semibold flex items-center justify-center gap-2 shadow-lg" whileHover={{ scale: 1.05, boxShadow: '0 20px 40px rgba(37, 99, 235, 0.4)' }} whileTap={{ scale: 0.95 }}>
-                Download Resume <FiArrowRight className="group-hover:translate-x-1 transition" />
-              </motion.a>
-              <motion.a href="#projects" className="px-8 py-4 border-2 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white rounded-xl font-semibold hover:bg-gray-100 dark:hover:bg-slate-800 transition" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                View My Work
-              </motion.a>
-            </motion.div>
+        {/* CTA Buttons */}
+        <motion.div className="flex flex-col sm:flex-row gap-6 justify-center mb-16" variants={itemVariants}>
+          <motion.a href="#projects" className="px-8 sm:px-10 py-4 border-2 border-white/40 text-white rounded-full font-semibold hover:border-white hover:bg-white/5 transition text-lg" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+            See My Latest Works
+          </motion.a>
+          <motion.a href="#contact" className="px-8 sm:px-10 py-4 bg-gradient-to-r from-orange-500 to-orange-600 text-white rounded-full font-semibold hover:shadow-lg hover:shadow-orange-500/50 transition text-lg" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+            Contact Me
+          </motion.a>
+        </motion.div>
 
-            {/* Social Links */}
-            <motion.div className="flex gap-6 items-center" variants={itemVariants}>
-              <span className="text-gray-600 dark:text-gray-400 font-medium">Connect:</span>
-              {[
-                { icon: FiGithub, url: 'https://github.com/yourusername', label: 'GitHub' },
-                { icon: FiLinkedin, url: 'https://linkedin.com/in/yourprofile', label: 'LinkedIn' },
-                { icon: FiMail, url: 'mailto:your.email@example.com', label: 'Email' },
-              ].map((social) => (
-                <motion.a key={social.label} href={social.url} target="_blank" rel="noreferrer" className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 dark:bg-slate-800 text-gray-700 dark:text-gray-300 hover:bg-blue-600 hover:text-white dark:hover:bg-cyan-500 transition" whileHover={{ scale: 1.2, rotate: 10 }} whileTap={{ scale: 0.9 }}>
-                  <social.icon size={20} />
-                </motion.a>
-              ))}
-            </motion.div>
-          </motion.div>
+        {/* Social Links */}
+        <motion.div className="flex justify-center gap-6 items-center" variants={itemVariants}>
+          <span className="text-gray-400 text-sm">Follow Me:</span>
+          {[
+            { icon: FiLinkedin, url: 'https://linkedin.com/in/yourprofile', label: 'LinkedIn' },
+            { icon: FiGithub, url: 'https://github.com/yourusername', label: 'GitHub' },
+            { icon: FiInstagram, url: 'https://instagram.com/yourprofile', label: 'Instagram' },
+            { icon: FiYoutube, url: 'https://youtube.com/@yourprofile', label: 'YouTube' },
+          ].map((social) => (
+            <motion.a key={social.label} href={social.url} target="_blank" rel="noreferrer" className="w-12 h-12 flex items-center justify-center rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white hover:bg-orange-500 hover:border-orange-500 transition" whileHover={{ scale: 1.15, rotate: 10 }} whileTap={{ scale: 0.9 }}>
+              <social.icon size={24} />
+            </motion.a>
+          ))}
+        </motion.div>
+      </motion.div>
 
-          {/* Image Section */}
-          <motion.div className="flex justify-center items-center" variants={itemVariants}>
-            <motion.div className="relative w-64 h-64 sm:w-72 sm:h-72 lg:w-96 lg:h-96" animate={{ y: [0, -15, 0] }} transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}>
-              {/* Glow Background */}
-              <motion.div className="absolute inset-0 bg-gradient-to-br from-blue-400/30 to-cyan-400/30 rounded-3xl blur-3xl" animate={{ scale: [1, 1.1, 1] }} transition={{ duration: 3, repeat: Infinity }} />
-
-              {/* Image Container */}
-              <div className="relative z-10 w-full h-full rounded-3xl overflow-hidden border-4 border-white/20 dark:border-slate-700/50 shadow-2xl backdrop-blur-sm">
-                <motion.img src={heroImg} alt="Shrimathi T" className="w-full h-full object-cover" whileHover={{ scale: 1.05 }} transition={{ duration: 0.3 }} />
-              </div>
-
-              {/* Decorative Rings */}
-              <motion.div className="absolute -inset-4 border-2 border-gradient-to-r from-blue-400/30 to-cyan-400/30 rounded-3xl" animate={{ rotate: 360 }} transition={{ duration: 20, repeat: Infinity, ease: 'linear' }} />
-              <motion.div className="absolute -inset-8 border border-gradient-to-r from-purple-400/20 to-blue-400/20 rounded-3xl" animate={{ rotate: -360 }} transition={{ duration: 30, repeat: Infinity, ease: 'linear' }} />
-            </motion.div>
-          </motion.div>
+      {/* Scroll Indicator */}
+      <motion.div className="absolute bottom-8 left-1/2 -translate-x-1/2" animate={{ y: [0, 10, 0] }} transition={{ duration: 2, repeat: Infinity }}>
+        <div className="text-gray-500 text-sm">Scroll to explore</div>
+        <div className="w-6 h-10 border-2 border-gray-500 rounded-full flex items-start justify-center mt-2">
+          <motion.div className="w-1 h-2 bg-gray-500 rounded-full mt-2" animate={{ y: [0, 8, 0] }} transition={{ duration: 2, repeat: Infinity }} />
         </div>
       </motion.div>
     </section>
